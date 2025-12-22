@@ -1,0 +1,37 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="text-center bg-info  btn-primary">
+    <a href="{% url 'add' %}" style="color:skyblue; text-decoration: none; font-weight: 500px;"><h1 class="text-white">Create New Post</h1></a>
+</div>
+
+
+
+{% for g in ff %}
+<div style="background-color:white">
+<a href="{% url 'show' g.id %}"  class="text-center" style="text-decoration: none;"><h1>{{g.title|capfirst}}</h1></a>
+<p class="text-center" style="font-size: 30px">{{g.brief|capfirst}}</p>
+{% if g.link %}
+<a href="{{g.link}}" class="text-center"><p>{{g.link}}</p></a>
+{% endif %}
+    <div class="row">
+        <div class="col-sm-2 mt-2">   
+            <div><h5 style="text-align: left; margin-left: 10px; font-style: italic; color: mediumblue;">{{g.likes.count}} Like{{g.likes.count|pluralize}}</h5></div>
+            <a href="{% url 'show' g.id %}">Read more..</a>
+        </div>
+        <div class="col-sm-3 offset-7 mt-2">
+           <div style="text-align: right; text-align: end; margin-right: 10px; padding-right: 5px;">{{g.name}}</div>     
+          <div style="text-align: right;">{{g.dtn}}</div>
+        </div>
+        </div>
+</div>
+
+<hr>
+
+{% endfor %}
+
+
+
+{% endblock %}

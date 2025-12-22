@@ -1,0 +1,55 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row bg-light">
+    <div class="col-sm-3 my-5 text-center">
+      {% if fp.dp %}
+        <img src="{{fp.dp.url}}" alt="profile_pic" class="rounded-circle my-2" width="150px" height="180px">
+        {% else %}
+        <img src="{% static 'app/image/default.png' %}" alt="profile_pic" class="rounded-circle my-2" width="150px" height="180px">
+        {% endif %}
+        <h3>{{aa.first_name|capfirst}}&nbsp;{{aa.last_name|capfirst}}</h3>
+        <hr>
+        {% if fp.dob %}
+        <p style="margin-bottom: auto;">D.O.B</p>
+        <p>{{fp.dob}}</p>
+        {% endif %}
+    </div>
+
+
+        <div class="col-sm-9 bg-white my-5">
+        <h1 class="text-center">Post Informations</h1>
+        <table class="table table-hover bg-white">
+          <thead>
+            <tr style="background-color:teal;" class="text-center">
+              <th>TITLE</th>
+              <th>DESCRIPTIONS</th>
+              <th>URL</th>
+            </tr>
+          </thead>
+          {% if fm %}
+          {% for f in fm %}
+          <tbody>
+            <tr class="text-center">
+              <td>{{f.title|capfirst}}</td>
+              <td>{{f.brief|capfirst}}</td>
+              <td>{{f.link}}</td>
+            </tr>
+          </tbody>
+          {% endfor %}
+          {% else %}
+          <tr class="text-center">
+            
+            <td></td>
+            <td><h2>No Post Uploaded</h2></td>
+            <td></td>
+          </tr>
+          {% endif %}
+        </table>
+        <br>
+        <hr>
+        </div>
+</div>
+
+
+{% endblock content %}

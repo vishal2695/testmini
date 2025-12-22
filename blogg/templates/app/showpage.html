@@ -1,0 +1,57 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+{% for g in b %}
+<div>
+<h1 class="my-4">{{g.title|capfirst}}</h1>
+<div style="font-style: italic;">-by: {{g.name}}</div>
+<div style="font-style: italic; font-size: 12px;">{{g.dtn}}</div><hr>
+<!-- Created by : {{g.name}} <br>
+{{g.dtn}}  <hr> -->
+<br>
+<mark><p style="font-size: 30px;">{{g.brief|capfirst}}</p></mark>
+
+<br>
+{% if g.link %}
+<a href="{{g.link}}"><p>{{g.link}}</p></a>
+{% endif %}
+</div>
+<br><hr>
+
+{{total_likes}} Like{{ total_likes|pluralize }}   &nbsp; &nbsp;{{comments.count}} Comment{{comments|pluralize}}
+<hr>
+<div>
+    <form action="{% url 'likes' g.id %}" method="POST">
+        {% csrf_token %}
+        {% if liked %}
+        <button class="btn btn-danger btn-primary-sm btn-success" type="submit" name="blog_id" value="{{g.id}}">Unlike</button>
+        {% else %}
+        <button class="btn btn-info btn-primary-sm btn-success" type="submit" name="blog_id" value="{{g.id}}">Like</button>
+        {% endif %}
+    </form>
+    
+</div>
+{% endfor %}
+<hr>
+<div>
+    <form method="post" novalidate>
+    {% csrf_token %}
+    {{comform.as_p}}
+    <input type="submit" value="Comment" class="btn btn-info btn-primary-sm btn-success">
+    </form>
+</div>
+<br>
+{% for comment in comments %}
+<h5>{{comment.content}}</h5>
+<div style="font-style: italic;">-by: {{comment.usr}}</div>
+<div style="font-style: italic; font-size: 12px;">{{comment.dat}}</div>
+<p><a href="{% url 'comdelete' comment.id %}">Delete</a></p>
+<br>
+{% endfor %}
+
+
+
+{% endblock content %}

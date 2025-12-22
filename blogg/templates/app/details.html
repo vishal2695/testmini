@@ -1,0 +1,62 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid bg-warning my-3">
+    <center> <h1>Users Information</h1></center>
+ </div>
+ <div class="my-2">
+   <form action="/search/" method="post" class="form-inline">
+     {% csrf_token %}
+     <input type="text" name='search' placeholder="Username" class="form-control mr-sm-1">
+     <button type="submit" class="btn btn-success">Search</button>
+   </form>
+ </div>
+ <div>
+    <table class="table table-hover bg-white">
+        <thead>
+          <tr class="text-center">
+            <th scope="col" style="width: 2%">ID</th>
+            <th scope="col" style="width: 10%">USERNAME</th>
+            <th scope="col" style="width: 15%">FIRST NAME</th>
+            <th scope="col" style="width: 15%">LAST NAME</th>
+            <th scope="col" style="width: 20%">EMAIL</th>
+            <th scope="col" style="width: 15%">DATE JOINED</th>
+            <th scope="col" style="width: 15%">LAST LOGIN</th>
+            <th scope="col" style="width: 2%">SUPERUSER</th>
+            <th scope="col" style="width: 0%">ACTIONS</th>
+          </tr>
+        </thead>
+        {% for f in ff %}
+        <tbody>
+          <tr class="text-center">
+            <th scope="row">{{f.id}}</th>
+            <td>{{f.username}}</td>
+            <td>{{f.first_name}}</td>
+            <td>{{f.last_name}}</td>
+            <td>{{f.email}}</td>
+            <td>{{f.date_joined}}</td>
+            <td>{{f.last_login}}</td>
+            <td>{{f.is_superuser}}</td>
+            <td><button  class="btn btn-info btn-sm btn-outline-light"><a style="text-decoration: none;color: white;" href="{% url 'datachange' f.id %}" class="fon">Update</a></button>&nbsp;&nbsp;
+                <button  class="btn btn-danger btn-sm btn-outline-success"><a style="text-decoration: none;color: white;" href="{% url 'deletedetail' f.id %}">Delete</a></button></td>
+          </tr>
+        </tbody>
+        {% empty %}
+        <tbody>
+          <tr class="text-center">
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><h3>No search found for this "{{abc}}"</h3></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tbody>
+        
+        {% endfor %}
+      </table>
+ </div>
+{% endblock content %}

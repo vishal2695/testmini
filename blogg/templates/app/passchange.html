@@ -1,0 +1,38 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid my-5">
+    <div class="row">
+        <div class="col-sm-12 bg-info text-center"><h1>Change Password</h1></div>
+    </div>
+    <div class="row my-5">
+        <div class="col-sm-6 offset-3 bg-white">
+            <br>
+            <form action="" method="post" novalidate>
+                {% csrf_token %}
+                {{ff.non_field_errors}}
+                {% for f in ff %}
+                <div>{{f.label}}{{f}}<small class="text-warning">{{f.errors|striptags}}</small></div>
+                {% endfor %}
+                
+                {% if messages %}
+                {% for message in messages %}
+                <span class="text-warning">{{message}}</span>
+                {% endfor %}
+                {% endif %}
+                <br>
+                <input type="submit" value="Submit" class="btn btn-primary">
+                <button  class="btn btn-danger"><a style="text-decoration: none;color: white;" href="{% url 'dashboard' %}">Cancel</a></button>
+            
+            </form>
+            <br>
+        </div>
+    </div>
+    
+    
+   
+
+
+</div>
+{% endblock content %}

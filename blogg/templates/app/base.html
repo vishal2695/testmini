@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %} 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'app/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
+    <title>MINI BLOGG</title>
+</head>
+<body>
+    <div class="container-fluid ">
+        {% include 'app/bar.html' %}        
+    </div>
+<div class="container page-wrapper">
+    
+<div style="background-color: rgb(82, 201, 82);" class="my-2 text-center">
+    {% block mg %}
+    {% if messages %}{% for message in messages %}<span class="success">{{message}}</span>{% endfor %}{% endif %}
+    {% endblock mg %}
+</div>
+<div>
+    {% block content %}
+
+
+
+    {% endblock content %}
+</div>
+</div>
+<br>
+
+<!-- <div class="page-wrapper">
+
+</div> -->
+ 
+<div class="footer">
+    <div class="footer-content">
+        <div class="footer-section text-center">
+            <p class="text-center mt-3">Contact Us</p>
+            <i class="far fa-envelope i-color"></i>
+            <i>dubeyblog@gmail.com</i>
+        </div>
+
+    </div>
+    <div class="footer-bottom">
+        &copy; MINI BLOGG | Designed by Vishal Dubey
+    </div>
+
+</div>
+
+
+
+
+
+<script src="{% static 'app/js/bootstrap.js' %}"></script>
+<script src="{% static 'app/js/jquery.js' %}"></script>
+<script src="{% static 'app/js/all.min.js' %}"></script>
+<script src="{% static 'app/js/popper.js' %}"></script>
+</body>
+</html>

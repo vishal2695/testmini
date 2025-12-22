@@ -1,0 +1,39 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="bg-warning my-3 text-center"><h1>Profile Information</h1></div>
+    <div><center>
+        {% if request.user.profile.dp %}
+           <div><img src="{{ request.user.profile.dp.url }}" class="rounded-circle" width="150px" height="180px"></div>
+               {% else %}
+           <div><img src="{% static 'app/image/default.png' %}" class="rounded-circle" width="150px" height="180px"></div>
+               {% endif %}</center>
+    </div>
+<div class="text-center"><a href="{% url 'dp' %}">Change Profile</a></div>
+
+
+     <form action="" method="post" novalidate>
+         {% csrf_token %}
+         {{ff.non_field_errors}}
+         {% for f in ff %}
+         <div>{{f.label}}{{f}}<small class="text-warning">{{f.errors|striptags}}</small></div>
+         {% endfor %}
+         {% for f in fp %}
+         <div>{{f.label}}{{f}}</div>
+         {% endfor %}
+         
+         {% if messages %}
+         {% for message in messages %}
+         <span class="text-warning">{{message}}</span>
+         {% endfor %}
+         {% endif %}
+         <br>
+         <input type="submit" value="Submit" class="btn btn-primary">
+         <button  class="btn btn-danger"><a style="text-decoration: none;color: white;" href="{% url 'dashboard' %}">Cancel</a></button>
+     
+     </form>
+
+    </div>
+{% endblock content %}

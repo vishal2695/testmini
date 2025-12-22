@@ -1,0 +1,37 @@
+{% extends 'app/base.html' %}
+{% load static %}    
+{% block content %}
+<div class="row">
+    <div class="col-sm-6 my-5 text-center">
+        <img src="{% static 'app/image/new.png' %}" class="mt-3">
+        <p style="font-style: italic;"><h4>Our ability to connect people ideas, opinions etc.. through digital networks has dramatically increased over time.</h4> </p>
+       
+    </div>
+
+
+        <div class="col-sm-5 offset-1 bg-white my-5">
+        <h1 class="tex">Sign Up</h1>
+        <p >It's quick & easy</p>
+        <form action="" method="post" novalidate>
+            {% csrf_token %}
+            {{fm.non_field_errors}}
+            {% for f in fm %}
+            <div>{{f.label}}{{f}}<small class="text-warning">{{f.errors|striptags}}</small></div>
+            {% endfor %}
+            
+            {% if messages %}
+            {% for message in messages %}
+            <span class="text-warning">{{message}}</span>
+            {% endfor %}
+            {% endif %}
+            <br>
+            <input type="submit" value="Submit" class="btn btn-warning form-control">
+            
+        </form>
+        <br>
+        </div>
+</div>
+
+
+
+{% endblock content %}

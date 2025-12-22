@@ -1,0 +1,68 @@
+{% load static %}
+
+ 
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+      <a class="navbar-brand text-warning" href="{% url 'home' %}"><h2 style="font-style: italic;">MINI BLOGG</h2></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            {% if request.user.is_authenticated %}
+            <a class="nav-link text-white" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'about' %}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'dashboard' %}">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'password' %}">Password Change</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'profile' %}">Profile</a>
+          </li>
+          {% if request.user.is_superuser %}
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'details' %}">Details</a>
+          </li>
+          {% endif %}
+          <form action="{% url 'searchblogg' %}" method="POST" class="form-inline my-2 my-lg-0">
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" type="search" name="searchuserblogg" placeholder="Username" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+          {% endif %}
+        </ul>
+        
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-items">
+            {% if request.user.is_authenticated %}
+              {% if request.user.profile.dp %}
+           <div><img src="{{ request.user.profile.dp.url }}" class="rounded-circle" width="50px" height="50px"></div>
+               {% else %}
+           <div><img src="{% static 'app/image/default.png' %}" class="rounded-circle" width="50px" height="50px"></div>
+               {% endif %}
+          </li>
+          <li class="nav-items">
+            <div class="mt-2 text-white"><h4 style="font-style: italic;">&nbsp;Hello,&nbsp;&nbsp;{{request.user.get_full_name|capfirst}}&nbsp;</h4></div>
+          </li>
+          <li class="nav-items">
+            <a href="{% url 'logout' %}" class="nav-link text-white mt-1">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-items">
+            <a href="{% url 'signup' %}" class="nav-link text-white">Sign Up</a>
+          </li>
+          <li class="nav-items">
+            <a href="{% url 'login' %}" class="nav-link text-white">Login</a>
+          </li>
+          {% endif %}
+        </ul>
+        
+      </div>
+    </nav>
+ 

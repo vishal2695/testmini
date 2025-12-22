@@ -1,0 +1,35 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid my-5">
+    <div class="row">
+        <div class="col-sm-12 bg-info text-center"><h1>Update Profile</h1></div>
+    </div>
+    <div class="row my-5">
+        <div class="col-sm-6 offset-3 bg-white">
+            <br>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                {{dpf.as_p}}
+                <br>
+                {% if request.user.profile.dp %}
+                <input type="submit" value="Update" class="btn btn-info offset-4">
+                {% else %}
+                <input type="submit" value="Upload" class="btn btn-success offset-4">
+                {% endif %}
+                <button  class="btn btn-danger "><a style="text-decoration: none;color: white;" href="{% url 'profile' %}">Cancel</a></button>
+                
+                </form>
+            <br>
+        </div>
+    </div>
+    
+    
+   
+
+
+</div>
+{% endblock content %}
+
