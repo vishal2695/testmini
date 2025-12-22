@@ -144,7 +144,7 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
-STATIC_ROOT = "/var/www/testmini/static/"
+STATIC_ROOT = "/var/www/testmini/static/app/"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = "/var/www/testmini/media/"
