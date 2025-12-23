@@ -150,7 +150,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Production static output directory
-STATIC_ROOT = '/var/www/mini/staticfiles'
+STATIC_ROOT = '/var/www/testmini/staticfiles'
 
 # Where Django finds static during development
 STATICFILES_DIRS = [
