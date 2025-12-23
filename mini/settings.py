@@ -154,7 +154,7 @@ STATIC_ROOT = '/var/www/mini/staticfiles'
 
 # Where Django finds static during development
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 
